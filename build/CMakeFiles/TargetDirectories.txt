@@ -838,6 +838,13 @@ C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/wifi_provisionin
 C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/wifi_provisioning/CMakeFiles/install.dir
 C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/wifi_provisioning/CMakeFiles/install/local.dir
 C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/wifi_provisioning/CMakeFiles/install/strip.dir
+C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/mpu6050/CMakeFiles/__idf_mpu6050.dir
+C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/mpu6050/CMakeFiles/edit_cache.dir
+C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/mpu6050/CMakeFiles/rebuild_cache.dir
+C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/mpu6050/CMakeFiles/list_install_components.dir
+C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/mpu6050/CMakeFiles/install.dir
+C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/mpu6050/CMakeFiles/install/local.dir
+C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/mpu6050/CMakeFiles/install/strip.dir
 C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/main/CMakeFiles/__idf_main.dir
 C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/main/CMakeFiles/edit_cache.dir
 C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/main/CMakeFiles/rebuild_cache.dir

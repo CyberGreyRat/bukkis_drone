@@ -1,2 +1,4 @@
 idf_component_register(SRCS "bukkis_drone.c"
-                    INCLUDE_DIRS ".")
+                       INCLUDE_DIRS "."
+                       REQUIRES mpu6050)
+                       
