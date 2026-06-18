@@ -569,6 +569,16 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
+  include("C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/pid/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/motor/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
   include("C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/main/cmake_install.cmake")
 endif()
 

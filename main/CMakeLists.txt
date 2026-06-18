@@ -1,3 +1,3 @@
 idf_component_register(SRCS "bukkis_drone.c"
                        INCLUDE_DIRS "."
-                       REQUIRES mpu6050 webserver nvs_flash)
+                       REQUIRES mpu6050 webserver nvs_flash pid motor)
