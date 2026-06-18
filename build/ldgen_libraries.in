@@ -158,5 +158,7 @@ $<TARGET_FILE:idf::spiffs>
 $<TARGET_FILE:idf::wifi_provisioning>
 $<TARGET_FILE:__idf_json>
 $<TARGET_FILE:idf::mpu6050>
+$<TARGET_FILE:idf::webserver>
 $<TARGET_FILE:idf::main>
 $<TARGET_FILE:__idf_mpu6050>
+$<TARGET_FILE:__idf_webserver>
