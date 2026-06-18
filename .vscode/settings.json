@@ -1,0 +1,17 @@
+{
+  "idf.currentSetup": "C:\\Users\\HK42\\esp\\v5.5.1\\esp-idf",
+  "idf.flashType": "UART",
+  "idf.openOcdConfigs": [
+    "board/esp32-wrover-kit-3.3v.cfg"
+  ],
+  "idf.customExtraVars": {
+    "IDF_TARGET": "esp32"
+  },
+  "clangd.path": "c:\\Users\\HK42\\tools\\esp-clang\\esp-19.1.2_20250312\\esp-clang\\bin\\clangd.exe",
+  "clangd.arguments": [
+    "--background-index",
+    "--query-driver=**",
+    "--compile-commands-dir=c:\\Users\\HK42\\Documents\\bukkis_drone\\bukkis_drone\\build"
+  ],
+  "idf.portWin": "COM9"
+}
