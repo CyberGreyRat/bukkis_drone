@@ -3,7 +3,7 @@
 
 // Pins für die 4 Motoren
 #define MOTOR_FL_PIN 13 // Vorne Links
-#define MOTOR_FR_PIN 12 // Vorne Rechts
+#define MOTOR_FR_PIN 32 // Vorne Rechts
 #define MOTOR_BL_PIN 14 // Hinten Links
 #define MOTOR_BR_PIN 27 // Hinten Rechts
 

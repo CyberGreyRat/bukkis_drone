@@ -1,3 +1,3 @@
 idf_component_register(SRCS "mpu6050.c"
                        INCLUDE_DIRS "include"
-                       REQUIRES driver log)
+                       REQUIRES driver esp_timer log)

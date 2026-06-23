@@ -845,6 +845,13 @@ C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/mpu6050/CMakeFil
 C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/mpu6050/CMakeFiles/install.dir
 C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/mpu6050/CMakeFiles/install/local.dir
 C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/mpu6050/CMakeFiles/install/strip.dir
+C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/motor/CMakeFiles/__idf_motor.dir
+C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/motor/CMakeFiles/edit_cache.dir
+C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/motor/CMakeFiles/rebuild_cache.dir
+C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/motor/CMakeFiles/list_install_components.dir
+C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/motor/CMakeFiles/install.dir
+C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/motor/CMakeFiles/install/local.dir
+C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/motor/CMakeFiles/install/strip.dir
 C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/webserver/CMakeFiles/__idf_webserver.dir
 C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/webserver/CMakeFiles/edit_cache.dir
 C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/webserver/CMakeFiles/rebuild_cache.dir
@@ -859,13 +866,6 @@ C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/pid/CMakeFiles/l
 C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/pid/CMakeFiles/install.dir
 C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/pid/CMakeFiles/install/local.dir
 C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/pid/CMakeFiles/install/strip.dir
-C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/motor/CMakeFiles/__idf_motor.dir
-C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/motor/CMakeFiles/edit_cache.dir
-C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/motor/CMakeFiles/rebuild_cache.dir
-C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/motor/CMakeFiles/list_install_components.dir
-C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/motor/CMakeFiles/install.dir
-C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/motor/CMakeFiles/install/local.dir
-C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/motor/CMakeFiles/install/strip.dir
 C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/main/CMakeFiles/__idf_main.dir
 C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/main/CMakeFiles/edit_cache.dir
 C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/build/esp-idf/main/CMakeFiles/rebuild_cache.dir

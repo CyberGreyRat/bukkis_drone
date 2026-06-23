@@ -5,6 +5,7 @@
 #include "esp_http_server.h"
 #include "esp_log.h"
 #include "webserver.h"
+#include "motor.h" // NEU 1: Wir brauchen die motor.h für den Testbefehl
 
 static const char *TAG = "WEBSERVER";
 
@@ -53,6 +54,17 @@ static esp_err_t data_handler(httpd_req_t *req) {
     return httpd_resp_send(req, json_response, HTTPD_RESP_USE_STRLEN);
 }
 
+// NEU 2: Der Handler, der beim Klick auf den Button ausgelöst wird
+static esp_err_t test_motors_handler(httpd_req_t *req) {
+    httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*"); // Wichtig für reibungsloses Fetching
+    ESP_LOGI(TAG, "Motor-Test über Web-UI angefordert!");
+    
+    motor_test_sequence(); // Startet deine Test-Schleife
+    
+    httpd_resp_set_type(req, "text/plain");
+    return httpd_resp_send(req, "Test gestartet", HTTPD_RESP_USE_STRLEN);
+}
+
 esp_err_t webserver_init(void) {
     esp_netif_init();
     esp_event_loop_create_default();
@@ -85,6 +97,15 @@ esp_err_t webserver_init(void) {
 
         httpd_uri_t data_uri = { .uri = "/data", .method = HTTP_GET, .handler = data_handler };
         httpd_register_uri_handler(server, &data_uri);
+
+        // NEU 3: Registrierung der neuen Route /test_motors
+        httpd_uri_t uri_test_motors = {
+            .uri      = "/test_motors",
+            .method   = HTTP_GET,
+            .handler  = test_motors_handler,
+            .user_ctx = NULL
+        };
+        httpd_register_uri_handler(server, &uri_test_motors);
     }
     return ESP_OK;
 }
