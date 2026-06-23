@@ -5,7 +5,11 @@
 #include "esp_http_server.h"
 #include "esp_log.h"
 #include "webserver.h"
-#include "motor.h" // NEU 1: Wir brauchen die motor.h für den Testbefehl
+#include "motor.h" 
+
+
+volatile bool start_motor_test_flag = false;
+
 
 static const char *TAG = "WEBSERVER";
 
@@ -54,15 +58,16 @@ static esp_err_t data_handler(httpd_req_t *req) {
     return httpd_resp_send(req, json_response, HTTPD_RESP_USE_STRLEN);
 }
 
-// NEU 2: Der Handler, der beim Klick auf den Button ausgelöst wird
+// Der Handler, der beim Klick auf den Button ausgelöst wird
 static esp_err_t test_motors_handler(httpd_req_t *req) {
-    httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*"); // Wichtig für reibungsloses Fetching
-    ESP_LOGI(TAG, "Motor-Test über Web-UI angefordert!");
+    httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");
     
-    motor_test_sequence(); // Startet deine Test-Schleife
+    // NUR das Flag setzen, NICHT die Funktion aufrufen!
+    start_motor_test_flag = true; 
     
     httpd_resp_set_type(req, "text/plain");
     return httpd_resp_send(req, "Test gestartet", HTTPD_RESP_USE_STRLEN);
+    // Der Handler ist nach 1 Millisekunde fertig, der Webserver läuft weiter!
 }
 
 esp_err_t webserver_init(void) {
