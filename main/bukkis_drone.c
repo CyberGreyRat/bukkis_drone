@@ -4,88 +4,89 @@
 #include "esp_log.h"
 #include "nvs_flash.h"
 #include "mpu6050.h"
-#include "webserver.h"
 #include "pid.h"
 #include "motor.h"
+#include "bukkis_bt.h"
 
 static const char *TAG = "MAIN";
 
-// Das Flag vom Webserver, damit wir es in der Schleife abfragen können
-extern volatile bool start_motor_test_flag;
-
+// Hilfsfunktion zum Begrenzen der Motorwerte
 float clamp(float value, float min, float max)
 {
-    if (value < min)
-        return min;
-    if (value > max)
-        return max;
+    if (value < min) return min;
+    if (value > max) return max;
     return value;
+}
+
+// Hilfsfunktion zum Umrechnen (Mappen) der Controller-Werte
+float map_value(int value, int in_min, int in_max, float out_min, float out_max) {
+    return (value - in_min) * (out_max - out_min) / (float)(in_max - in_min) + out_min;
 }
 
 void app_main(void)
 {
-    ESP_LOGI(TAG, "Starte Drohnen-System...");
-
+    // 1. NVS initialisieren (Zwingend erforderlich für Bluetooth!)
     esp_err_t ret = nvs_flash_init();
-    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND)
-    {
+    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
         ESP_ERROR_CHECK(nvs_flash_erase());
         ret = nvs_flash_init();
     }
     ESP_ERROR_CHECK(ret);
 
-    ESP_ERROR_CHECK(mpu6050_init());
-    ESP_ERROR_CHECK(webserver_init());
-    ESP_ERROR_CHECK(motor_init());
+    ESP_LOGI(TAG, "Starte Drohnen-System...");
 
-    // Optional: Die Motoren piepsen/zucken beim Hochfahren kurz als Status-Check
+    // 2. Hardware und Subsysteme initialisieren
+    ESP_ERROR_CHECK(mpu6050_init());
+    ESP_ERROR_CHECK(motor_init());
+    bluetooth_init(); // <-- Bluetooth starten
+
     motor_test_sequence();
 
-    // PID Regler initialisieren (kp, ki, kd, i_limit, out_limit)
+    // 3. PID Regler initialisieren
     pid_ctrl_t pid_pitch, pid_roll;
     pid_init(&pid_pitch, 1.2f, 0.0f, 0.5f, 20.0f, 40.0f);
     pid_init(&pid_roll, 1.2f, 0.0f, 0.5f, 20.0f, 40.0f);
 
     mpu6050_angles_t aktuelle_winkel;
 
-    // Zeit-Setup für exakt 100 Hz (10ms)
+    // 4. Zeit-Setup für exakt 100 Hz (10ms)
     TickType_t last_wake_time = xTaskGetTickCount();
     const TickType_t loop_delay = pdMS_TO_TICKS(10);
     const float dt = 0.010f;
 
     while (1)
     {
-        // 1. Webserver Button abfragen
-        if (start_motor_test_flag)
-        {
-            start_motor_test_flag = false;        // Direkt wieder scharfschalten
-            motor_test_sequence();                // Test läuft durch (blockierend)
-            last_wake_time = xTaskGetTickCount(); // Zeit-Anker neu setzen!
-        }
-
-        // 2. Sensoren lesen & Flug berechnen
+        // Sensoren lesen & Flug berechnen
         if (mpu6050_read_angles(&aktuelle_winkel) == ESP_OK)
         {
-            web_controls_t cmd = webserver_get_controls();
             float m_fl = 0, m_fr = 0, m_bl = 0, m_br = 0;
 
-            if (cmd.throttle > 2.0f)
+            // 1. Controller-Daten abgreifen und umrechnen
+            // Stick nach Oben = negativ (-512) bei Bluepad32. 
+            // Wir mappen -20 bis -512 auf 0 bis 100% (mit kleiner Deadzone).
+            float throttle_cmd = 0.0f;
+            if (bt_throttle < -20) { 
+                throttle_cmd = map_value(bt_throttle, -20, -512, 0.0f, 100.0f);
+            }
+
+            // Stick X/Y Mappen auf maximal +-30 Grad Neigung (mit kleiner Deadzone)
+            float pitch_cmd = 0.0f;
+            float roll_cmd = 0.0f;
+            if (bt_pitch > 20 || bt_pitch < -20) pitch_cmd = map_value(bt_pitch, -512, 511, -30.0f, 30.0f);
+            if (bt_roll > 20 || bt_roll < -20)   roll_cmd  = map_value(bt_roll, -512, 511, -30.0f, 30.0f);
+
+            // 2. Motorsteuerung anwenden
+            if (throttle_cmd > 2.0f)
             {
-                // PID Berechnungen
-                float out_pitch = pid_compute(&pid_pitch, cmd.pitch_setpoint, aktuelle_winkel.pitch, dt);
-                float out_roll = pid_compute(&pid_roll, cmd.roll_setpoint, aktuelle_winkel.roll, dt);
+                // PID Berechnungen mit Controller-Inputs
+                float out_pitch = pid_compute(&pid_pitch, pitch_cmd, aktuelle_winkel.pitch, dt);
+                float out_roll  = pid_compute(&pid_roll, roll_cmd, aktuelle_winkel.roll, dt);
 
                 // Mixer
-                //m_fl = cmd.throttle - out_pitch + out_roll;
-                //m_fr = cmd.throttle - out_pitch - out_roll;
-                //m_bl = cmd.throttle + out_pitch + out_roll;
-                //m_br = cmd.throttle + out_pitch - out_roll;
-
-                // Mixer (Vorzeichen invertiert)
-                m_fl = cmd.throttle + out_pitch - out_roll;
-                m_fr = cmd.throttle + out_pitch + out_roll;
-                m_bl = cmd.throttle - out_pitch - out_roll;
-                m_br = cmd.throttle - out_pitch + out_roll;
+                m_fl = throttle_cmd + out_pitch - out_roll;
+                m_fr = throttle_cmd + out_pitch + out_roll;
+                m_bl = throttle_cmd - out_pitch - out_roll;
+                m_br = throttle_cmd - out_pitch + out_roll;
 
                 // Begrenzen
                 m_fl = clamp(m_fl, 0.0f, 100.0f);
@@ -111,12 +112,9 @@ void app_main(void)
                 pid_reset(&pid_pitch);
                 pid_reset(&pid_roll);
             }
-
-            // Telemetrie an Webserver übergeben
-            webserver_update_data(aktuelle_winkel.pitch, aktuelle_winkel.roll, m_fl, m_fr, m_bl, m_br);
         }
 
-        // 3. Präzises Warten
+        // Präzises Warten
         vTaskDelayUntil(&last_wake_time, loop_delay);
     }
 }

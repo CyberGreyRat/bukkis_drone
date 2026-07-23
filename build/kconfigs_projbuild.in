@@ -3,3 +3,4 @@ source "C:/Users/HK42/esp/v5.5.1/esp-idf/components/esp_app_format/Kconfig.projb
 source "C:/Users/HK42/esp/v5.5.1/esp-idf/components/esp_rom/Kconfig.projbuild"
 source "C:/Users/HK42/esp/v5.5.1/esp-idf/components/esptool_py/Kconfig.projbuild"
 source "C:/Users/HK42/esp/v5.5.1/esp-idf/components/partition_table/Kconfig.projbuild"
+source "C:/Users/HK42/Documents/bukkis_drone/bukkis_drone/components/btstack/Kconfig.projbuild"

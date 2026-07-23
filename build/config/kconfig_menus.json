@@ -5287,6 +5287,44 @@
                 "children": [
                     {
                         "children": [],
+                        "depends_on": "<choice ESP32_BOARD>",
+                        "help": null,
+                        "id": "ESP_LYRAT_V4_3_BOARD",
+                        "name": "ESP_LYRAT_V4_3_BOARD",
+                        "range": null,
+                        "title": "ESP32-Lyrat V4.3",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "<choice ESP32_BOARD>",
+                        "help": null,
+                        "id": "ESP_CUSTOM_BOARD",
+                        "name": "ESP_CUSTOM_BOARD",
+                        "range": null,
+                        "title": "ESP32 custom board",
+                        "type": "bool"
+                    }
+                ],
+                "depends_on": null,
+                "help": "select an ESP32 board to use with BTstack.",
+                "id": "example-board-configuration-esp32-board",
+                "name": "ESP32_BOARD",
+                "title": "ESP32 board",
+                "type": "choice"
+            }
+        ],
+        "depends_on": null,
+        "id": "example-board-configuration",
+        "title": "Example Board Configuration",
+        "type": "menu"
+    },
+    {
+        "children": [
+            {
+                "children": [
+                    {
+                        "children": [],
                         "depends_on": "<choice COMPILER_OPTIMIZATION>",
                         "help": null,
                         "id": "COMPILER_OPTIMIZATION_DEBUG",
@@ -6796,7 +6834,10 @@
                                                 "help": "Maximum GATT Server Profiles Count",
                                                 "id": "BT_GATT_MAX_SR_PROFILES",
                                                 "name": "BT_GATT_MAX_SR_PROFILES",
-                                                "range": null,
+                                                "range": [
+                                                    1,
+                                                    32
+                                                ],
                                                 "title": "Max GATT Server Profiles",
                                                 "type": "int"
                                             },
@@ -6806,7 +6847,10 @@
                                                 "help": "Maximum GATT Service Attributes Count",
                                                 "id": "BT_GATT_MAX_SR_ATTRIBUTES",
                                                 "name": "BT_GATT_MAX_SR_ATTRIBUTES",
-                                                "range": null,
+                                                "range": [
+                                                    1,
+                                                    500
+                                                ],
                                                 "title": "Max GATT Service Attributes",
                                                 "type": "int"
                                             },
@@ -6898,7 +6942,10 @@
                                                 "help": "Maximum GATTC cache characteristic count",
                                                 "id": "BT_GATTC_MAX_CACHE_CHAR",
                                                 "name": "BT_GATTC_MAX_CACHE_CHAR",
-                                                "range": null,
+                                                "range": [
+                                                    1,
+                                                    500
+                                                ],
                                                 "title": "Max gattc cache characteristic for discover",
                                                 "type": "int"
                                             },
@@ -6908,7 +6955,10 @@
                                                 "help": "Maximum GATTC notify(indication) register number",
                                                 "id": "BT_GATTC_NOTIF_REG_MAX",
                                                 "name": "BT_GATTC_NOTIF_REG_MAX",
-                                                "range": null,
+                                                "range": [
+                                                    1,
+                                                    64
+                                                ],
                                                 "title": "Max gattc notify(indication) register number",
                                                 "type": "int"
                                             },
@@ -6928,7 +6978,10 @@
                                                 "help": "The number of attempts to reconnect if the connection establishment failed",
                                                 "id": "BT_GATTC_CONNECT_RETRY_COUNT",
                                                 "name": "BT_GATTC_CONNECT_RETRY_COUNT",
-                                                "range": null,
+                                                "range": [
+                                                    0,
+                                                    255
+                                                ],
                                                 "title": "The number of attempts to reconnect if the connection establishment failed",
                                                 "type": "int"
                                             },
@@ -6938,7 +6991,10 @@
                                                 "help": "Bluetooth Connection establishment maximum time, if connection time exceeds this value, the connection\nestablishment fails, ESP_GATTC_OPEN_EVT or ESP_GATTS_OPEN_EVT is triggered.",
                                                 "id": "BT_BLE_ESTAB_LINK_CONN_TOUT",
                                                 "name": "BT_BLE_ESTAB_LINK_CONN_TOUT",
-                                                "range": null,
+                                                "range": [
+                                                    1,
+                                                    60
+                                                ],
                                                 "title": "Timeout of BLE connection establishment",
                                                 "type": "int"
                                             }
@@ -8927,7 +8983,10 @@
                                 "help": "Maximum BT/BLE connection count. The ESP32-C3/S3 chip supports a maximum of 10 instances,\nincluding ADV, SCAN and connections. The ESP32-C3/S3 chip can connect up to 9 devices if\nADV or SCAN uses only one. If ADV and SCAN are both used, The ESP32-C3/S3 chip is connected\nto a maximum of 8 devices. Because Bluetooth cannot reclaim used instances once ADV or SCAN\nis used.",
                                 "id": "BT_ACL_CONNECTIONS",
                                 "name": "BT_ACL_CONNECTIONS",
-                                "range": null,
+                                "range": [
+                                    1,
+                                    9
+                                ],
                                 "title": "BT/BLE MAX ACL CONNECTIONS(1~9)",
                                 "type": "int"
                             },
@@ -8977,7 +9036,10 @@
                                 "help": "The number of security records for peer devices.",
                                 "id": "BT_SMP_MAX_BONDS",
                                 "name": "BT_SMP_MAX_BONDS",
-                                "range": null,
+                                "range": [
+                                    1,
+                                    32
+                                ],
                                 "title": "BT/BLE maximum bond device count",
                                 "type": "int"
                             },
@@ -8997,7 +9059,10 @@
                                 "help": "Bluetooth Device name length shall be no larger than 248 octets, If the broadcast data cannot contain\nthe complete device name, then only the shortname will be displayed, the rest parts that can't fit in\nwill be truncated.",
                                 "id": "BT_MAX_DEVICE_NAME_LEN",
                                 "name": "BT_MAX_DEVICE_NAME_LEN",
-                                "range": null,
+                                "range": [
+                                    32,
+                                    248
+                                ],
                                 "title": "length of bluetooth device name",
                                 "type": "int"
                             },
@@ -9007,7 +9072,10 @@
                                 "help": "This set RPA timeout of Controller and Host.\nDefault is 900 s (15 minutes). Range is 1 s to 1 hour (3600 s).",
                                 "id": "BT_BLE_RPA_TIMEOUT",
                                 "name": "BT_BLE_RPA_TIMEOUT",
-                                "range": null,
+                                "range": [
+                                    1,
+                                    3600
+                                ],
                                 "title": "Timeout of resolvable private address",
                                 "type": "int"
                             },
@@ -11459,7 +11527,10 @@
                                 "help": "BLE maximum connections of bluetooth controller.\nEach connection uses 1KB static DRAM whenever the BT controller is enabled.",
                                 "id": "BTDM_CTRL_BLE_MAX_CONN",
                                 "name": "BTDM_CTRL_BLE_MAX_CONN",
-                                "range": null,
+                                "range": [
+                                    1,
+                                    9
+                                ],
                                 "title": "BLE Max Connections",
                                 "type": "int"
                             },
@@ -12040,7 +12111,10 @@
                                         "help": "Maximum number of devices which can be recorded in scan duplicate filter.\nWhen the maximum amount of device in the filter is reached, the oldest device will be refreshed.",
                                         "id": "BTDM_SCAN_DUPL_CACHE_SIZE",
                                         "name": "BTDM_SCAN_DUPL_CACHE_SIZE",
-                                        "range": null,
+                                        "range": [
+                                            10,
+                                            1000
+                                        ],
                                         "title": "Maximum number of devices in scan duplicate filter",
                                         "type": "int"
                                     },
@@ -12050,7 +12124,10 @@
                                         "help": "If the period value is non-zero, the controller will periodically clear the device information\nstored in the scan duuplicate filter. If it is 0, the scan duuplicate filter will not be cleared\nuntil the scanning is disabled. Duplicate advertisements for this period should not be sent to the\nHost in advertising report events.\nThere are two scenarios where the ADV packet will be repeatedly reported:\n1. The duplicate scan cache is full, the controller will delete the oldest device information and\nadd new device information.\n2. When the refresh period is up, the controller will clear all device information and start filtering\nagain.",
                                         "id": "BTDM_SCAN_DUPL_CACHE_REFRESH_PERIOD",
                                         "name": "BTDM_SCAN_DUPL_CACHE_REFRESH_PERIOD",
-                                        "range": null,
+                                        "range": [
+                                            0,
+                                            1000
+                                        ],
                                         "title": "Duplicate scan list refresh period (seconds)",
                                         "type": "int"
                                     },
@@ -12122,7 +12199,10 @@
                                         "help": "The number of unprocessed advertising report that Bluedroid can save.If you set\n`BTDM_BLE_ADV_REPORT_FLOW_CTRL_NUM` to a small value, this may cause adv packets lost.\nIf you set `BTDM_BLE_ADV_REPORT_FLOW_CTRL_NUM` to a large value, Bluedroid may cache a\nlot of adv packets and this may cause system memory run out. For example, if you set\nit to 50, the maximum memory consumed by host is 35 * 50 bytes. Please set\n`BTDM_BLE_ADV_REPORT_FLOW_CTRL_NUM` according to your system free memory and handle adv\npackets as fast as possible, otherwise it will cause adv packets lost.",
                                         "id": "BTDM_BLE_ADV_REPORT_FLOW_CTRL_NUM",
                                         "name": "BTDM_BLE_ADV_REPORT_FLOW_CTRL_NUM",
-                                        "range": null,
+                                        "range": [
+                                            50,
+                                            1000
+                                        ],
                                         "title": "BLE adv report flow control number",
                                         "type": "int"
                                     },
@@ -12132,7 +12212,10 @@
                                         "help": "When adv report flow control is enabled, The ADV lost event will be generated when the number\nof ADV packets lost in the controller reaches this threshold. It is better to set a larger value.\nIf you set `BTDM_BLE_ADV_REPORT_DISCARD_THRSHOLD` to a small value or printf every adv lost event, it\nmay cause adv packets lost more.",
                                         "id": "BTDM_BLE_ADV_REPORT_DISCARD_THRSHOLD",
                                         "name": "BTDM_BLE_ADV_REPORT_DISCARD_THRSHOLD",
-                                        "range": null,
+                                        "range": [
+                                            1,
+                                            1000
+                                        ],
                                         "title": "BLE adv lost event threshold value",
                                         "type": "int"
                                     }
@@ -32572,6 +32655,243 @@
                 "depends_on": null,
                 "id": "component-config-wi-fi-provisioning-manager",
                 "title": "Wi-Fi Provisioning Manager",
+                "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "<choice BLUEPAD32_PLATFORM>",
+                                "help": "Targets Adafruit devices that have an AirLift co-processor,\nlike the Adafruit Metro M4 Express AirLift.",
+                                "id": "BLUEPAD32_PLATFORM_AIRLIFT",
+                                "name": "BLUEPAD32_PLATFORM_AIRLIFT",
+                                "range": null,
+                                "title": "AirLift",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice BLUEPAD32_PLATFORM>",
+                                "help": "Targets MightyMiggy device.",
+                                "id": "BLUEPAD32_PLATFORM_MIGHTYMIGGY",
+                                "name": "BLUEPAD32_PLATFORM_MIGHTYMIGGY",
+                                "range": null,
+                                "title": "MightyMiggy",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "SPI_FLASH_USE_LEGACY_IMPL && <choice BLUEPAD32_PLATFORM>",
+                                "help": "Targets Arduino devices that have the NINA co-processor,\nlike the Arduino Nano RP2040 Connect.\nRequires \"Component config\" -> \"Spi Flasher Driver\" -> \"Use the legacy...\" to be enabled.",
+                                "id": "BLUEPAD32_PLATFORM_NINA",
+                                "name": "BLUEPAD32_PLATFORM_NINA",
+                                "range": null,
+                                "title": "NINA",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice BLUEPAD32_PLATFORM>",
+                                "help": "Targets Unijoysticle 2 / Unijoysticle 2+ devices.",
+                                "id": "BLUEPAD32_PLATFORM_UNIJOYSTICLE",
+                                "name": "BLUEPAD32_PLATFORM_UNIJOYSTICLE",
+                                "range": null,
+                                "title": "Unijoysticle",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice BLUEPAD32_PLATFORM>",
+                                "help": "Custom platform, provided by the user/vendor",
+                                "id": "BLUEPAD32_PLATFORM_CUSTOM",
+                                "name": "BLUEPAD32_PLATFORM_CUSTOM",
+                                "range": null,
+                                "title": "Custom",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice BLUEPAD32_PLATFORM>",
+                                "help": "Legacy option. Defined by PLATFORM environment variable.\nUsed when compiling Bluepad32 using Makefile.",
+                                "id": "BLUEPAD32_PLATFORM_MAKEFILE",
+                                "name": "BLUEPAD32_PLATFORM_MAKEFILE",
+                                "range": null,
+                                "title": "Decided by Makefile",
+                                "type": "bool"
+                            }
+                        ],
+                        "depends_on": null,
+                        "help": "Select the Bluepad32 target platform.",
+                        "id": "component-config-bluepad32-target-platform",
+                        "name": "BLUEPAD32_PLATFORM",
+                        "title": "Target platform",
+                        "type": "choice"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "The maximum number of gamepads that can be connected at the same time.\n\nThis limit is defined at compile-time because Bluepad32 tries not to use malloc.\nThe higher the number, the more RAM it will take.",
+                        "id": "BLUEPAD32_MAX_DEVICES",
+                        "name": "BLUEPAD32_MAX_DEVICES",
+                        "range": null,
+                        "title": "Maximum of connected gamepads",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "When enabled, it will set GAP Security level to 2.\nThis allows Nintendo Switch Pro controller to connect successfully.\n\nBut when enabled, DualShock 3 gamepad fails to connect.\n\nOnly disable it if you want to use DualShock 3 gamepads.",
+                        "id": "BLUEPAD32_GAP_SECURITY",
+                        "name": "BLUEPAD32_GAP_SECURITY",
+                        "range": null,
+                        "title": "Enable GAP Security",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "<choice BLUEPAD32_LOG_LEVEL>",
+                                "help": null,
+                                "id": "BLUEPAD32_LOG_LEVEL_NONE",
+                                "name": "BLUEPAD32_LOG_LEVEL_NONE",
+                                "range": null,
+                                "title": "No output",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice BLUEPAD32_LOG_LEVEL>",
+                                "help": null,
+                                "id": "BLUEPAD32_LOG_LEVEL_ERROR",
+                                "name": "BLUEPAD32_LOG_LEVEL_ERROR",
+                                "range": null,
+                                "title": "Error",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice BLUEPAD32_LOG_LEVEL>",
+                                "help": null,
+                                "id": "BLUEPAD32_LOG_LEVEL_INFO",
+                                "name": "BLUEPAD32_LOG_LEVEL_INFO",
+                                "range": null,
+                                "title": "Info",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "<choice BLUEPAD32_LOG_LEVEL>",
+                                "help": null,
+                                "id": "BLUEPAD32_LOG_LEVEL_DEBUG",
+                                "name": "BLUEPAD32_LOG_LEVEL_DEBUG",
+                                "range": null,
+                                "title": "Debug",
+                                "type": "bool"
+                            }
+                        ],
+                        "depends_on": "!ESP_CONSOLE_NONE",
+                        "help": "Specify how much output to see in logs.",
+                        "id": "component-config-bluepad32-log-verbosity",
+                        "name": "BLUEPAD32_LOG_LEVEL",
+                        "title": "Log verbosity",
+                        "type": "choice"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": null,
+                        "id": "BLUEPAD32_LOG_LEVEL",
+                        "name": "BLUEPAD32_LOG_LEVEL",
+                        "range": null,
+                        "title": null,
+                        "type": "int"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "BLUEPAD32_USB_CONSOLE_ENABLE",
+                                "help": "Enables the NVS console commands. Useful for debugging.",
+                                "id": "BLUEPAD32_CONSOLE_NVS_COMMAND_ENABLE",
+                                "name": "BLUEPAD32_CONSOLE_NVS_COMMAND_ENABLE",
+                                "range": null,
+                                "title": "Enable NVS console commands",
+                                "type": "bool"
+                            }
+                        ],
+                        "depends_on": "!ESP_CONSOLE_NONE",
+                        "help": "Enables the USB console.\nUser can interact with the Bluepad32 firmware via commands.",
+                        "id": "BLUEPAD32_USB_CONSOLE_ENABLE",
+                        "name": "BLUEPAD32_USB_CONSOLE_ENABLE",
+                        "range": null,
+                        "title": "Enable USB Console",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "BT_ENABLED",
+                        "help": "Enables Bluetooth Low Energy by default.\nNeeded for some mice and gamepads that only work with BLE.\nCan be overriden from the console by using the command \"ble_enabled\"",
+                        "id": "BLUEPAD32_ENABLE_BLE_BY_DEFAULT",
+                        "name": "BLUEPAD32_ENABLE_BLE_BY_DEFAULT",
+                        "range": null,
+                        "title": "Enable BLE by default (beta)",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "BLUEPAD32_PLATFORM_UNIJOYSTICLE",
+                        "help": "Enables Swap button in for the Unijoysticle2 C64.\nBy enabling it, if the firmware is used in the FlashParty Edition,\nthen the Swap button might trigger unexpectedly.\nSo, unless you are using FlashParty Edition, leave this feature enabled.",
+                        "id": "BLUEPAD32_UNIJOYSTICLE_ENABLE_SWAP_FOR_C64",
+                        "name": "BLUEPAD32_UNIJOYSTICLE_ENABLE_SWAP_FOR_C64",
+                        "range": null,
+                        "title": "Enable Swap Button on Unijoysticle2 C64",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "The maximum of addresses that can be inserted in the Bluetooth allowlist.\n\nThis limit is defined at compile-time because Bluepad32 tries not to use malloc.\nThe higher the number, the more RAM it will take.",
+                        "id": "BLUEPAD32_MAX_ALLOWLIST",
+                        "name": "BLUEPAD32_MAX_ALLOWLIST",
+                        "range": null,
+                        "title": "Maximum size of the Bluetooth allowlist",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "A Virtual Device is when a controller like DualSense or DualShock4\nsupports also mouse (it is a touchpad, but converted to mouse).\nIn this case the \"mouse\" will represent a virtual device.\nWhen this happends, Bluepad32 reports that two devices are connected:\na gamepad and a mouse.\nThe \"gamepad device\" has the \"mouse virtual device\" as child device.\nWhen the controller disconnects, or when the \"gamepad device\"\nis forced to disconnect then both devices will be disconnected.\nCan be overriden from the console by using the command \"virtual_device_enabled\"",
+                        "id": "BLUEPAD32_ENABLE_VIRTUAL_DEVICE_BY_DEFAULT",
+                        "name": "BLUEPAD32_ENABLE_VIRTUAL_DEVICE_BY_DEFAULT",
+                        "range": null,
+                        "title": "Enable Virtual Devices by default",
+                        "type": "bool"
+                    }
+                ],
+                "depends_on": null,
+                "id": "component-config-bluepad32",
+                "title": "Bluepad32",
+                "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Select this option to enable BTstack's audio driver\nEnabled by default on ESP32, ESP32-C3 AND ESP32-S3",
+                        "id": "BTSTACK_AUDIO",
+                        "name": "BTSTACK_AUDIO",
+                        "range": null,
+                        "title": "I2S Audio driver",
+                        "type": "bool"
+                    }
+                ],
+                "depends_on": null,
+                "id": "component-config-btstack-configuration",
+                "title": "BTstack Configuration",
                 "type": "menu"
             }
         ],
